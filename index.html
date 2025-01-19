@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UJIAN</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="message-box">
+            <h1>UJIAN AKHIR SEMESTER</h1>
+            <p>JAWAB DENGAN JUJUR</p>
+            <div class="button-container">
+                <button onclick="revealMessage()">BUKA</button>
+            </div>
+            <div class="final-message" id="final-message" style="display: none;">
+                <h2><span class="heart"></span> Will you be my girlfriend? <span class="heart"></span></h2>
+                <button onclick="terima()">Terima</button>
+                <button onclick="tolak()">Tolak</button>
+            </div>
+            <div class="response-message" id="response-message" style="display: none;">
+                <h2 id="response-text"></h2>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk menampilkan pesan "Nembak"
+        function revealMessage() {
+            document.getElementById("final-message").style.display = "block";
+        }
+
+        // Fungsi untuk menangani pilihan "Terima"
+        function terima() {
+            const responseMessage = document.getElementById("response-text");
+            responseMessage.innerHTML = "Yay! Terima kasih,💖";
+            document.getElementById("response-message").style.display = "block";
+
+            // Simpan pilihan dalam localStorage untuk sesi yang lebih panjang
+            localStorage.setItem("response", "Terima");
+
+            // Arahkan ke halaman berikutnya (FLOWERS)
+            window.location.href = "flowers/index.html";
+        }
+
+        // Fungsi untuk menangani pilihan "Tolak"
+        function tolak() {
+            const responseMessage = document.getElementById("response-text");
+            responseMessage.innerHTML = "Oh, tidak apa-apa, aku tetap menghargai kamu. 😊";
+            document.getElementById("response-message").style.display = "block";
+
+            // Simpan pilihan dalam localStorage untuk sesi yang lebih panjang
+            localStorage.setItem("response", "Tolak");
+        }
+        // Menampilkan pilihan yang disimpan di localStorage (jika ada)
+        window.onload = function() {
+            const savedResponse = localStorage.getItem("response");
+            if (savedResponse) {
+                document.getElementById("response-message").style.display = "block";
+                document.getElementById("response-text").innerHTML = `Pilihan yang disimpan: ${savedResponse}`;
+            }
+        };
+    </script>
+</body>
+</html>
